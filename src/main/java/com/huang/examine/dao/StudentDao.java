@@ -16,4 +16,6 @@ public interface StudentDao {
     @Select("select * from student where id = #{id}")
     public Student getStudentById(Integer id);
 
+    @Select("select * from student where studentId = #{studentId}")
+    Student getStudentByStudentID(Integer studentId);
 }

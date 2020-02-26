@@ -15,4 +15,9 @@ public class StudentService implements StudentDao {
     public Student getStudentById(Integer id) {
         return studentDao.getStudentById(id);
     }
+
+    @Override
+    public Student getStudentByStudentID(Integer studentId) {
+        return studentDao.getStudentByStudentID(studentId);
+    }
 }
