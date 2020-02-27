@@ -4,30 +4,43 @@
     <meta charset="UTF-8">
     <title>login</title>
     <link rel="stylesheet" href="css/login.css">
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
 </head>
 <body>
 <div class="login-box">
     <h2>Login</h2>
-    <form id="login" name="login" method="post" action="/login">
+    <form id="loginForm" name="loginForm" method="post" >
         <div class="login-field">
-            <input type="text" name="" required="">
+            <input type="text" name="username" id="username" maxlength="10"  οninput="if(value.length>10)value=value.slice(0,10)" required="">
             <label>Username</label>
         </div>
         <div class="login-field">
-            <input type="password" name="" required="">
+            <input type="password" name="password" id="password" required="">
             <label>Password</label>
         </div>
         <div >
-            <label><input type="radio" name="identity" value="student" required=""/>Student</label>
+            <label><input type="radio" name="identity"   value="student" required=""/>Student</label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="identity" value="teacher" required=""/>Teacher</label>
+            <label><input type="radio" name="identity"   value="teacher" required=""/>Teacher</label>
         </div>
 
         <button type="reset" name="">Reset</button>&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="submit" name="" >Submit</button>
+        <button type="submit" name="" onclick="tologin()" >Submit</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -35,5 +48,48 @@
     </form>
 </div>
 </body>
+<script>
+    function tologin(){
+        $("#loginForm").validate({
+            submitHandler:function(form){
+                doLogin();
+            }
+        });
+    }
+    function doLogin(){
+        g_showLoading();
 
+        var inputPass = $("#password").val();
+        var salt = g_passsword_salt;
+        var str = ""+salt.charAt(0)+salt.charAt(2) + inputPass +salt.charAt(5) + salt.charAt(4);
+        var password = md5(str);
+        var identity=$("input[type='radio']:checked").val();
+        $.ajax({
+            url: "/login",
+            type: "POST",
+            data:{
+                username:$("#username").val(),
+                password: password,
+                identity:identity
+            },
+            success:function(data){
+                layer.closeAll();
+                if(data.code == 0){
+                    layer.msg("登录成功");
+                    if(identity=="student"){
+                        window.location.href="/student/index";
+                    }else if(identity=="teacher"){
+                        window.location.href="/teacher/index";
+                    }
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(data){
+                layer.closeAll();
+                layer.msg(data.msg);
+            }
+        });
+    }
+</script>
 </html>
