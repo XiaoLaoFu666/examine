@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>湖北工业大学在线考试系统</title>
     <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
     <!-- bootstrap -->
@@ -20,35 +20,41 @@
 </head>
 <body>
 <div class="login-box">
-    <h2>Login</h2>
+    <h2>用户登录</h2>
     <form id="loginForm" name="loginForm" method="post" >
         <div class="login-field">
             <input type="text" name="username" id="username" maxlength="10"  οninput="if(value.length>10)value=value.slice(0,10)" required="">
-            <label>Username</label>
+            <label>账户：</label>
         </div>
         <div class="login-field">
             <input type="password" name="password" id="password" required="">
-            <label>Password</label>
+            <label>密码：</label>
         </div>
         <div >
-            <label><input type="radio" name="identity"   value="student" required=""/>Student</label>
+            <label><input type="radio" name="identity"   value="student" required=""/>学生</label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="identity"   value="teacher" required=""/>Teacher</label>
+            <label><input type="radio" name="identity"   value="teacher" required=""/>老师</label>
         </div>
 
-        <button type="reset" name="">Reset</button>&nbsp;&nbsp;
+        <button type="submit" name="" onclick="tologin()" >登录</button>
+        &nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="submit" name="" onclick="tologin()" >Submit</button>
+        <button type="button" name="register" id="register" onclick="toregister()" >注册</button>&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="index">还有没有账号？点击注册</a>
+        <a href="index">忘记密码？点击找回</a>
     </form>
 </div>
 </body>
 <script>
+
+    function toregister() {
+        window.location.href="http://www.baidu.com";
+    }
+
     function tologin(){
         $("#loginForm").validate({
             submitHandler:function(form){
@@ -57,7 +63,7 @@
         });
     }
     function doLogin(){
-        g_showLoading();
+        // g_showLoading();
 
         var inputPass = $("#password").val();
         var salt = g_passsword_salt;
