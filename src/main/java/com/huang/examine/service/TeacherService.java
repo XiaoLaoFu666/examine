@@ -14,7 +14,7 @@ public class TeacherService {
     @Autowired
     private TeacherDao teacherDao;
 
-    public Teacher getTeacherByTeacherID(Integer teacherId){
+    public Teacher getTeacherByTeacherID(String teacherId){
         return teacherDao.getTeacherByTeacherID(teacherId);
     }
 

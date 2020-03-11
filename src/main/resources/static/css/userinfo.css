@@ -1,0 +1,21 @@
+a img{
+    border:none
+}
+.testIMG{
+    float:left;
+    display:inline;
+    margin-top:0;
+    margin-left:5px;
+}
+.testTXT {
+    float:left;
+    display:inline;
+    margin-top:0;
+    margin-left:35px;
+}
+.testButton {
+    float:left;
+    display:inline;
+    margin-top:5px;
+    margin-left:55px;
+}

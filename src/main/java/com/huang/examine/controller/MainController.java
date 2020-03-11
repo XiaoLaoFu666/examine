@@ -6,6 +6,7 @@ import com.huang.examine.result.CodeMsg;
 import com.huang.examine.result.Result;
 import com.huang.examine.service.StudentService;
 import com.huang.examine.service.UserService;
+import com.huang.examine.utils.GlobalUserGet;
 import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,8 @@ public class MainController {
     @Autowired
     private UserService userService;
 
+
+
     @RequestMapping
     public String index(){
         return "login";
@@ -49,8 +52,7 @@ public class MainController {
     @ResponseBody
     public String indexC(){
         Student student = studentService.getStudentById(1);
-        return "hello examine" + student.getName() + student.getUserid();
+        return "hello examine" + student.getName() + student.getUserId();
     }
-
 
 }
