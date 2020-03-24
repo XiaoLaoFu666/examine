@@ -14,6 +14,9 @@ import java.util.List;
 @Mapper
 @Component
 public interface ExamDao {
-    @Select("select * from exam where id in (select exam from userexam where user= #{userId})")
-    public List<Exam> getExamByStudentId(Integer userId);
+
+    @Select("select * from exam where id in (select exam from userexam where user= #{userId} and usertype = #{type}) order by date asc")
+    public List<Exam> getExamByStudentId(Integer userId,Integer type);
+
+
 }

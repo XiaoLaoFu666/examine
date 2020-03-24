@@ -36,11 +36,15 @@ public class StudentService implements StudentDao {
     @Override
     public Student getStudentByStudentID(String studentId) {
         Student student = studentDao.getStudentByStudentID(studentId);
-        List<Exam> examList = examDao.getExamByStudentId(student.getId());
+        List<Exam> examList = examDao.getExamByStudentId(student.getId(),1);
         student.setExamList(examList);
         Specialty specialty = specialtyDao.getByUserId(student.getSpecialtyId());
         student.setSpecialty(specialty);
         return student;
     }
 
+    @Override
+    public int updateInfo(Student student) {
+        return studentDao.updateInfo(student);
+    }
 }

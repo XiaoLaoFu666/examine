@@ -9,7 +9,6 @@ import com.huang.examine.entity.User;
 import com.huang.examine.redis.RedisService;
 import com.huang.examine.redis.StudentKey;
 import com.huang.examine.redis.TeacherKey;
-import com.huang.examine.redis.UserKey;
 import com.huang.examine.result.CodeMsg;
 import com.huang.examine.result.Result;
 import com.huang.examine.utils.MD5Util;
@@ -99,7 +98,8 @@ public class UserService {
         return teacher;
     }
 
-    private void addCookie(HttpServletResponse response, String token, User user) {
+
+    public void addCookie(HttpServletResponse response, String token, User user) {
         redisService.set(StudentKey.token, token, user);
         Cookie cookie = new Cookie(COOKI_NAME_TOKEN, token);
         cookie.setMaxAge(StudentKey.token.expireSeconds());

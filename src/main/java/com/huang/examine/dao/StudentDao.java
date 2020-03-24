@@ -19,4 +19,7 @@ public interface StudentDao {
 
     @Select("select * from student where userId = #{userId}")
     Student getStudentByStudentID(String userId);
+
+    @Update("update student set name = #{name} ,password = #{password},sex = #{sex},userId = #{userId},salt = #{salt},img = #{img} where id = #{id}")
+    int updateInfo(Student student);
 }
