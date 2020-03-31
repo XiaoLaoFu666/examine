@@ -166,13 +166,13 @@
                             <a class="nav-link " href="/student/index"><i class="fa fa-fw fa-user-circle"></i>个人中心</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/exam/examStudent" ><i class="fa fa-fw fa-rocket"></i>考试中心</a>
+                            <a class="nav-link " href="/exam/examStudent" ><i class="fa fa-fw fa-rocket"></i>考试中心</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/student/info"><i class="fas fa-fw fa-chart-pie"></i>个人信息</a>
+                            <a class="nav-link " href="/student/info"><i class="fas fa-fw fa-chart-pie"></i>个人信息</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="/examInquire" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
+                            <a class="nav-link active" href="/examInquire" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" ><i class="fas fa-fw fa-table"></i>考试预约</a>
@@ -220,7 +220,7 @@
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">个人信息</a></li>
+                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">成绩查询</a></li>
                                     </ol>
                                 </nav>
                             </div>
@@ -236,79 +236,54 @@
                             <h3 class="section-title" th:text="${student.name} + 同学 + ',' + 你好 + ':'"></h3>
                         </div>
                         <div class="card">
-                            <h5 class="card-header">个人信息</h5>
-                            <div class="card-body">
-                                <form id="infoForm" name="infoForm" method="post" action="/student/changeInfo">
-                                    <div class="form-group">
-                                        <img src="/img/1.jpg" width="150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="submit" class="btn btn-space btn-primary">点击上传头像</button>                                    </div>
-                                    <div class="form-group">
-                                        <label for="studentNumber" class="col-form-label">学号</label>
-                                        <input id="studentNumber" type="text" class="form-control" th:value="${student.userId}" readonly="true">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name" class="col-form-label">姓名</label>
-                                        <input id="name" name="name" type="text" class="form-control" th:value="${student.name}" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="sex">性别</label>
-                                        <input id="sex" name="sex" type="text" th:value="${student.sex}" class="form-control" readonly="true">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="college">学院</label>
-                                        <input id="college" name="college" type="text"  th:value="${student.specialty.college}" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="major">专业</label>
-                                        <input id="major" name="major" type="text"  th:value="${student.specialty.major}" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="grade">年级</label>
-                                        <input id="grade" name="grade" type="text"  th:value="${student.specialty.grade}" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="classname">班级</label>
-                                        <input id="classname" name="classname" type="text"  th:value="${student.specialty.classname}" class="form-control">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
-                                            <label class="be-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input"><span class="custom-control-label">Remember me</span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-6 pl-0">
-                                            <p class="text-right">
-                                                <button type="submit"  name=""  class="btn btn-space btn-primary">提交</button>
-                                                <button class="btn btn-space btn-secondary">取消</button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="card-body border-top">
-                                <h3>密码修改</h3>
-                                <form id="PassForm" name="PassForm" method="post">
-                                    <div class="form-group">
-                                        <label for="originalPassword" class="col-form-label">原始密码</label>
-                                        <input id="originalPassword" name="originalPassword" type="password"  class="form-control form-control-sm" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="newPassword" class="col-form-label">新密码</label>
-                                        <input id="newPassword" name="newPassword" type="password"  class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="newPasswordRel" class="col-form-label">再次输入密码</label>
-                                        <input id="newPasswordRel" name="newPasswordRel" type="password"  class="form-control form-control-lg" required>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6 pl-0">
-                                            <p class="text-right">
-                                                <button type="button" onclick="doChange()" class="btn btn-space btn-primary">提交</button>
-                                                <button class="btn btn-space btn-secondary">取消</button>
-                                            </p>
+                            <h5 class="card-header">考试列表</h5>
+                            <ul class="nav nav-tabs " id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"  aria-controls="home" aria-selected="true">已完成</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show in active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered first">
+                                                <thead class="bg-light">
+                                                <tr class="border-0">
+                                                    <th class="border-0">#</th>
+                                                    <th class="border-0">考试编号</th>
+                                                    <th class="border-0">考试名称</th>
+                                                    <th class="border-0">考试科目</th>
+                                                    <th class="border-0">考试时间</th>
+                                                    <th class="border-0">卷面总分</th>
+                                                    <th class="border-0">考试状态</th>
+                                                    <th class="border-0">考试成绩</th>
+                                                    <th class="border-0">操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="examVo:${examVoList}">
+                                                    <td>1</td>
+                                                    <td th:text="${examVo.exam.number}"></td>
+                                                    <td th:text="${examVo.exam.name}"></td>
+                                                    <td th:text="${examVo.exam.course}"></td>
+                                                    <td th:text="${#dates.format(examVo.exam.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                    <td th:text="${examVo.totalScore}"></td>
+                                                    <div th:if="${examVo.status} eq true">
+                                                        <td><span class="badge-dot badge-brand mr-1"></span>已完成</td>
+                                                        <td th:text="${examVo.score}"></td>
+                                                        <td><a class="alert-danger" href="http://www.baidu.com">点击查询</a></td>
+                                                    </div>
+                                                    <div th:if="${examVo.status} eq false">
+                                                        <td><span class="badge-dot badge-dark mr-1"></span>未完成</td>
+                                                        <td>0</td>
+                                                        <td><a class="alert-danger" href="#">点击查询</a></td>
+                                                    </div>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -368,42 +343,12 @@
 <script src="/userResource/assets/libs/js/dashboard-ecommerce.js"></script>
 </body>
 <script>
-    function doChange(){
-        // g_showLoading();
-        var inputPass = $("#newPassword").val();
-        var inputPassRel = $("#newPasswordRel").val();
-        var originalPassword = $("#originalPassword").val();
-        if(inputPass!=inputPassRel){
-            layer.closeAll();
-            layer.msg("两次输入密码不一致！请重新输入");
-            return false;
+    $(function(){
+        //$('table tr:not(:first)').remove();
+        var len = $('table tr').length;
+        for(var i = 1;i<len-1;i++){
+            $('table tr:eq('+i+') td:first').text(i);
         }
-        var salt = g_passsword_salt;
-        var str = ""+salt.charAt(0)+salt.charAt(2) + inputPass +salt.charAt(5) + salt.charAt(4);
-        var str2 = ""+salt.charAt(0)+salt.charAt(2) + originalPassword +salt.charAt(5) + salt.charAt(4);
-        var newPassword = md5(str);
-        var originalPassword = md5(str2);
-        $.ajax({
-            url: "/student/changePass",
-            type: "POST",
-            data:{
-                newPassword:newPassword,
-                originalPassword:originalPassword
-            },
-            success:function(data){
-                layer.closeAll();
-                if(data.code == 0){
-                    layer.msg("修改成功");
-                        window.location.href="/student/info";
-                }else{
-                    layer.msg(data.msg);
-                }
-            },
-            error:function(data){
-                layer.closeAll();
-                layer.msg(data.msg);
-            }
-        });
-    }
+    });
 </script>
 </html>

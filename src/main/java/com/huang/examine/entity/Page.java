@@ -1,16 +1,48 @@
 package com.huang.examine.entity;
 
+/**
+ * @author DELL
+ */
 public class Page {
 
-    private PageDetail pageDetail;
+    private PageQues pageQues;
 
-
-    public PageDetail getPageDetail() {
-        return pageDetail;
+    public PageQues getPageQues() {
+        return pageQues;
     }
 
-    public void setPageDetail(PageDetail pageDetail) {
-        this.pageDetail = pageDetail;
+    public void setPageQues(PageQues pageQues) {
+        this.pageQues = pageQues;
+    }
+
+    private Integer totalScore;
+
+    private Integer chooseScore;
+
+    private Integer judgeScore;
+
+    public Integer getChooseScore() {
+        return chooseScore;
+    }
+
+    public void setChooseScore(Integer chooseScore) {
+        this.chooseScore = chooseScore;
+    }
+
+    public Integer getJudgeScore() {
+        return judgeScore;
+    }
+
+    public void setJudgeScore(Integer judgeScore) {
+        this.judgeScore = judgeScore;
+    }
+
+    public Integer getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(Integer totalScore) {
+        this.totalScore = totalScore;
     }
 
     /**

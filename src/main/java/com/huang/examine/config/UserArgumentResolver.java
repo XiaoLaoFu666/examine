@@ -1,6 +1,7 @@
 package com.huang.examine.config;
 
 import com.huang.examine.access.UserContext;
+import com.huang.examine.entity.User;
 import com.huang.examine.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -22,11 +23,12 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		Class<?> clazz = parameter.getParameterType();
-		return clazz==UserService.class;
+		return clazz == User.class;
 	}
 
+	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+								  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		return UserContext.getUser();
 	}
 

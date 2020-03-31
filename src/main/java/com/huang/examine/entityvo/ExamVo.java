@@ -12,9 +12,32 @@ public class ExamVo {
 
     public long timeLeft;
 
-    public int status;
+    public boolean status;
 
-    public ExamVo(Exam exam, int remainSeconds, Integer status) {
+    public int score;
+
+    //考试总分
+    public int totalScore;
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public ExamVo(){};
+
+    public ExamVo(Exam exam, int remainSeconds, boolean status) {
         this.exam = exam;
         this.timeLeft = remainSeconds;
         this.status = status;
@@ -36,11 +59,11 @@ public class ExamVo {
         this.timeLeft = timeLeft;
     }
 
-    public int getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }

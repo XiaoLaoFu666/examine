@@ -172,7 +172,7 @@
                             <a class="nav-link " href="/student/info"><i class="fas fa-fw fa-chart-pie"></i>个人信息</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="#" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
+                            <a class="nav-link" href="/examInquire" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" ><i class="fas fa-fw fa-table"></i>考试预约</a>
@@ -264,7 +264,8 @@
                                              <tbody>
 
                                              <tr th:each="examVo:${examList}">
-                                                 <span th:if="${examVo.status !=3} ">
+                                                 <span th:if="${examVo.exam.status !=3} ">
+                                                     <span th:if="${examVo.status} != true"></span>
                                                  <td th:text="${examVo.exam.number}"></td>
                                                  <td th:text="${examVo.exam.name}"></td>
                                                  <td th:text="${examVo.exam.course}"></td>
@@ -272,7 +273,7 @@
                                                  <td th:text="${#dates.format(examVo.exam.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                                  <td th:text="${#dates.format(examVo.exam.endTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                                                  <td id="ExamStart">
-                                                     <button class="btn btn-secondary" onclick="toExam()" id="start" name="start">点击进入考试</button>
+                                                     <a class="btn btn-secondary" th:href="'/exam/startExam?examId=' + ${examVo.exam.id}" id="start" name="start">点击进入考试</a>
                                                      <input type="hidden" id="examId" name="examId" th:value="${examVo.exam.id}">
                                                      <span id="startExam" th:if="${examVo.timeLeft} <= 300 ">
                                                          <input type="hidden" id="timeLeft" th:value="${examVo.timeLeft}" />
@@ -305,14 +306,14 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr th:each="examVo:${examList}">
-                                                 <span th:if="${examVo.status eq 3}">
+                                                 <span th:if="${examVo.exam.status eq 3 || examVo.status eq 1}">
                                                  <td th:text="${examVo.exam.number}"></td>
                                                  <td th:text="${examVo.exam.name}"></td>
                                                  <td th:text="${examVo.exam.course}"></td>
                                                  <td th:text="${examVo.exam.time} + 分钟"></td>
                                                  <td th:text="${#dates.format(examVo.exam.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                                  <td th:text="${#dates.format(examVo.exam.endTime,'yyyy-MM-dd HH:mm:ss')}"></td>
-                                                     </span>
+                                                 </span>
                                                 </tr>
                                                 </tbody>
                                                 <tfoot>
@@ -387,7 +388,7 @@
     });
 
     function toExam() {
-        window.location.href="http://www.baidu.com";
+        window.location.href="/exam/startExam?examId=examId";
     }
     function countDown() {
         var remainSeconds = $("#timeLeft").val();

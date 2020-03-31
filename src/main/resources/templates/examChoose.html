@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>在线考试页面</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png">
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/userResource/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="/userResource/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/userResource/assets/libs/css/style.css">
+    <link rel="stylesheet" href="/userResource/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper p-0">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <nav class="navbar navbar-expand dashboard-top-header bg-white">
+        <div class="container-fluid">
+            <div class="dashboard-nav-brand">
+                <h2 >选择题</h2>
+            </div>
+            <!-- ============================================================== -->
+            <!-- brand logo -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- end brand logo -->
+            <!-- ============================================================== -->
+        </div>
+    </nav>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <!-- ============================================================== -->
+                <!-- alerts  -->
+                <!-- ============================================================== -->
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <form id="chooseQuestion" action="/exam/choose" method="post">
+                        <div class="card">
+                        <div class="card-body border-top">
+                            <input type="hidden" id="hasNext" name="hasNext" th:value="${hasNext}"/>
+                            <input type="hidden" id="index" name="index" th:value="${index}"/>
+                            <input type="hidden" id="examId" name="examId" th:value="${exam.id}"  />
+                            <input type="hidden" id="questionId" name="questionId" th:value="${choose.id}"/>
+                            <div class="card-body">
+                            <div class="alert alert-primary" role="option" >
+                                <h4 th:text="${choose.question}"></h4>
+                            </div>
+                            <div class="alert alert-secondary" role="option">
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="response" class="custom-control-input" value="A" required><span class="custom-control-label" th:text="A + ' : '+ ${choose.responsea}">A:A This is a secondary alert—check it out!</span>
+                                </label>
+                            </div>
+                            <div class="alert alert-success" role="option">
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="response" class="custom-control-input" value="B" required><span class="custom-control-label" th:text="B+ ' : '+ ${choose.responseb}">B:A This is a secondary alert—check it out!</span>
+                                </label>
+                            </div>
+                            <div class="alert alert-danger" role="option">
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="response" class="custom-control-input" value="C" required><span class="custom-control-label"  th:text="C + ' : '+ ${choose.responsec}">C:A This is a secondary alert—check it out!</span>
+                                </label>
+                            </div>
+                            <div class="alert alert-warning" role="alert">
+                                <label class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" name="response" class="custom-control-input" value="D" required><span class="custom-control-label" th:text="D + ' : '+ ${choose.responsed}">D:A This is a secondary alert—check it out!</span>
+                                 </label>
+                            </div>
+                                <div class="error-section">
+                                <span th:if="${hasNext == 1}">
+                                   <div class="error-section-content">
+                                     <button  type = "submit" class="btn btn-secondary btn-lg">下一题</button>
+                                   </div>
+                                </span>
+                                 <span th:if="${hasNext == 0}">
+                                    <div class="error-section-content">
+                                        <button  type = "submit" class="btn btn-secondary btn-lg">提交本部分</button>
+                                    </div>
+                                </span>
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <!-- ============================================================== -->
+                <!-- end alerts  -->
+                <!-- ============================================================== -->
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <div class="bg-white p-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-dark text-center">
+                        Copyright © 2020 Concept <a href="https://www.hbut.edu.cn/" target="_blank" title="湖北工业大学">--湖北工业大学</a> - Collect from HuangJunHao</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end footer -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- end wrapper -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- end footer -->
+        <!-- ============================================================== -->
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end main wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- end main wrapper -->
+<!-- ============================================================== -->
+<!-- Optional JavaScript -->
+<script src="/userResource/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+<script src="/userResource/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="/userResource/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+<script src="/userResource/assets/libs/js/main-js.js"></script>
+</body>
+<script>
+    var response =$("input[type='radio']:checked").val();
+</script>
+</html>
