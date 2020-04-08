@@ -1,11 +1,8 @@
 package com.huang.examine.controller;
 
-import com.huang.examine.entity.Exam;
-import com.huang.examine.entity.Student;
-import com.huang.examine.entity.User;
+import com.huang.examine.entity.*;
 import com.huang.examine.entityvo.ExamVo;
-import com.huang.examine.service.ExamService;
-import com.huang.examine.service.PageService;
+import com.huang.examine.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +28,15 @@ public class ExamInquireController {
     @Autowired
     private PageService pageService;
 
+    @Autowired
+    private ExamResultService examResultService;
+
+    @Autowired
+    private ChooseService chooseService;
+
+    @Autowired
+    private JudgeService judgeService;
+
     @RequestMapping()
     public String index(HttpServletRequest request, HttpServletResponse response, Model model, User user){
         if(user == null){
@@ -55,4 +61,60 @@ public class ExamInquireController {
         return "examInquire";
     }
 
+    @RequestMapping("/examReview")
+    public String examReview(HttpServletRequest request,HttpServletResponse response,Model model,User user){
+        if(user == null){
+            return "login";
+        }
+        Student student = (Student) user;
+        Integer examId = Integer.valueOf(request.getParameter("examId"));
+        List<ExamResult> examResultList = examResultService.getExamResultByExamId(student.getId(),examId);
+        int index = 0;
+        int hasNext = 1;
+        if(examResultList.size() == index + 1){
+            hasNext = 0;
+        }
+        ExamResult examResult = examResultList.get(index);
+        if(examResult.getType() == 1){
+            Choose choose = chooseService.getById(examResult.getQuestionid());
+            model.addAttribute("choose",choose);
+        }else{
+            Judge judge = judgeService.getById(examResult.getQuestionid());
+            model.addAttribute("judge",judge);
+        }
+        model.addAttribute("examResult",examResult);
+        model.addAttribute("hasNext",hasNext);
+        model.addAttribute("index",index);
+        return "examReview";
+    }
+
+    @RequestMapping("/reviewDetail")
+    public String reviewDetail(HttpServletRequest request,HttpServletResponse response,Model model,User user){
+        if(user == null){
+            return "login";
+        }
+        Student student = (Student) user;
+        Integer examId = Integer.valueOf(request.getParameter("examId"));
+        List<ExamResult> examResultList = examResultService.getExamResultByExamId(student.getId(),examId);
+        int index = Integer.valueOf(request.getParameter("index")) + 1;
+        int hasNext = Integer.valueOf(request.getParameter("hasNext"));
+        if(hasNext == 0){
+            return index(request,response,model,user);
+        }
+        if(examResultList.size() == index + 1){
+            hasNext = 0;
+        }
+        ExamResult examResult = examResultList.get(index);
+        if(examResult.getType() == 1){
+            Choose choose = chooseService.getById(examResult.getQuestionid());
+            model.addAttribute("choose",choose);
+        }else{
+            Judge judge = judgeService.getById(examResult.getQuestionid());
+            model.addAttribute("judge",judge);
+        }
+        model.addAttribute("examResult",examResult);
+        model.addAttribute("hasNext",hasNext);
+        model.addAttribute("index",index);
+        return "examReview";
+    }
 }

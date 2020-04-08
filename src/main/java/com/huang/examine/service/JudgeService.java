@@ -5,6 +5,8 @@ import com.huang.examine.entity.Judge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Author: HuangJunHao
  * @Date: 2020/3/28 11:37
@@ -23,5 +25,15 @@ public class JudgeService implements JudgeDao {
     @Override
     public int insert(Judge judge) {
         return judgeDao.insert(judge);
+    }
+
+    @Override
+    public Judge getById(Integer id) {
+        return judgeDao.getById(id);
+    }
+
+    @Override
+    public List<Judge> getMockJudges(int subjectId, int number) {
+        return judgeDao.getMockJudges(subjectId,number);
     }
 }
