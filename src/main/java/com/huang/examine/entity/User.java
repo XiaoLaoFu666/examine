@@ -9,6 +9,24 @@ public class User {
     public Integer username;
     public String password;
     public String salt;
+    public String userId;
+    public String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public Integer getId() {
         return id;

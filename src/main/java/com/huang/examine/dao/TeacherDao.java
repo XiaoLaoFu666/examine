@@ -16,6 +16,6 @@ public interface TeacherDao {
      * @return Teacher
      * */
     @Select("select * from teacher where userId = #{userId}")
-    public Teacher getTeacherByTeacherID(Integer userId);
+    public Teacher getTeacherByTeacherID(String userId);
 
 }

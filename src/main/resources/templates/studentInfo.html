@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/userResource/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="/userResource/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/userResource/assets/libs/css/style.css">
+    <link rel="stylesheet" href="/userResource/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="/userResource/assets/vendor/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="/userResource/assets/vendor/charts/morris-bundle/morris.css">
+    <link rel="stylesheet" href="/userResource/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/userResource/assets/vendor/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="/userResource/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/userinfo.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <title>用户中心</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png">
+</head>
+
+<body>
+<div class="dashboard-main-wrapper">
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="/student/index">用户中心</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right-top">
+                    <li class="nav-item">
+                        <div id="custom-search" class="top-search-bar">
+                            <input class="form-control" type="text" placeholder="Search..">
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown notification">
+                        <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
+                            <li>
+                                <div class="notification-title"> Notification</div>
+                                <div class="notification-list">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action active">
+                                            <div class="notification-info">
+                                                <div class="notification-list-user-img"><img src="/userResource/assets/images/avatar-2.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                <div class="notification-list-user-block"><span class="notification-list-user-name">Jeremy Rakestraw</span>accepted your invitation to join the team.
+                                                    <div class="notification-date">2 min ago</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="notification-info">
+                                                <div class="notification-list-user-img"><img src="/userResource/assets/images/avatar-3.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                <div class="notification-list-user-block"><span class="notification-list-user-name" th:text="${student.name}"></span>is now following you
+                                                    <div class="notification-date">2 days ago</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="notification-info">
+                                                <div class="notification-list-user-img"><img src="/userResource/assets/images/avatar-4.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                <div class="notification-list-user-block"><span class="notification-list-user-name" >Monaan Pechi</span> is watching your main repository
+                                                    <div class="notification-date">2 min ago</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="notification-info">
+                                                <div class="notification-list-user-img"><img src="/userResource/assets/images/avatar-5.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                <div class="notification-list-user-block"><span class="notification-list-user-name">Jessica Caruso</span>accepted your invitation to join the team.
+                                                    <div class="notification-date">2 min ago</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="list-footer"> <a href="#">View all notifications</a></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown connection">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-fw fa-th"></i> </a>
+                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                            <li class="connection-list">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"><img src="/userResource/assets/images/github.png" alt="" > <span>Github</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"><img src="/userResource/assets/images/dribbble.png" alt="" > <span>Dribbble</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"><img src="/userResource/assets/images/dropbox.png" alt="" > <span>Dropbox</span></a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"><img src="/userResource/assets/images/bitbucket.png" alt=""> <span>Bitbucket</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"><img src="/userResource/assets/images/mail_chimp.png" alt="" ><span>Mail chimp</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"><img src="/userResource/assets/images/slack.png" alt="" > <span>Slack</span></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="conntection-footer"><a href="#">More</a></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown nav-user">
+                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/userResource/assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                            <div class="nav-user-info">
+                                <h5 class="mb-0 text-white nav-user-name"><div th:text="${student.name}"></div> </h5>
+                                <span class="status"></span><span class="ml-2"><div th:if="${student.role} eq 'student'" th:text="学生"></div></span>
+                            </div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>设置</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>退出登录</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <div class="nav-left-sidebar sidebar-dark">
+        <div class="menu-list">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-divider">
+                            Menu
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="/student/index"><i class="fa fa-fw fa-user-circle"></i>个人中心</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/exam/examStudent" ><i class="fa fa-fw fa-rocket"></i>考试中心</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/student/info"><i class="fas fa-fw fa-chart-pie"></i>个人信息</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/examInquire" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-table"></i>考试预约</a>
+                        </li>
+                        <li class="nav-divider">
+                            Features
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/mockExam/" ><i class="fas fa-fw fa-file"></i> 模拟刷题 </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-inbox"></i>其他设置 <span class="badge badge-secondary">New</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-columns"></i>Icons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" ></i>Maps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" ><i class="fas fa-f fa-folder"></i>Menu Level</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="dashboard-ecommerce">
+            <div class="container-fluid dashboard-content ">
+                <!-- ============================================================== -->
+                <!-- pageheader  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title">学生个人中心</h2>
+                            <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                            <div class="page-breadcrumb">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">个人信息</a></li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- end pageheader  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="section-block" id="basicform">
+                            <h3 class="section-title" th:text="${student.name} + 同学 + ',' + 你好 + ':'"></h3>
+                        </div>
+                        <div class="card">
+                            <h5 class="card-header">个人信息</h5>
+                            <div class="card-body">
+                                <form id="infoForm" name="infoForm" method="post" action="/student/changeInfo">
+                                    <div class="form-group">
+                                        <img src="/img/1.jpg" width="150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button type="submit" class="btn btn-space btn-primary">点击上传头像</button>                                    </div>
+                                    <div class="form-group">
+                                        <label for="studentNumber" class="col-form-label">学号</label>
+                                        <input id="studentNumber" type="text" class="form-control" th:value="${student.userId}" readonly="true">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label">姓名</label>
+                                        <input id="name" name="name" type="text" class="form-control" th:value="${student.name}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sex">性别</label>
+                                        <input id="sex" name="sex" type="text" th:value="${student.sex}" class="form-control" readonly="true">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="college">学院</label>
+                                        <input id="college" name="college" type="text"  th:value="${student.specialty.college}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="major">专业</label>
+                                        <input id="major" name="major" type="text"  th:value="${student.specialty.major}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="grade">年级</label>
+                                        <input id="grade" name="grade" type="text"  th:value="${student.specialty.grade}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="classname">班级</label>
+                                        <input id="classname" name="classname" type="text"  th:value="${student.specialty.classname}" class="form-control">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
+                                            <label class="be-checkbox custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"><span class="custom-control-label">Remember me</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 pl-0">
+                                            <p class="text-right">
+                                                <button type="submit"  name=""  class="btn btn-space btn-primary">提交</button>
+                                                <button class="btn btn-space btn-secondary">取消</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-body border-top">
+                                <h3>密码修改</h3>
+                                <form id="PassForm" name="PassForm" method="post">
+                                    <div class="form-group">
+                                        <label for="originalPassword" class="col-form-label">原始密码</label>
+                                        <input id="originalPassword" name="originalPassword" type="password"  class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newPassword" class="col-form-label">新密码</label>
+                                        <input id="newPassword" name="newPassword" type="password"  class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newPasswordRel" class="col-form-label">再次输入密码</label>
+                                        <input id="newPasswordRel" name="newPasswordRel" type="password"  class="form-control form-control-lg" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 pl-0">
+                                            <p class="text-right">
+                                                <button type="button" onclick="doChange()" class="btn btn-space btn-primary">提交</button>
+                                                <button class="btn btn-space btn-secondary">取消</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        Copyright © 2020 HBUT 在线考试系统 ----Author:MR.huang
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="text-md-right footer-links d-none d-sm-block">
+                            <a href="javascript: void(0);">About</a>
+                            <a href="javascript: void(0);">Support</a>
+                            <a href="javascript: void(0);">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- end wrapper  -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- end main wrapper  -->
+<!-- ============================================================== -->
+<!-- Optional JavaScript -->
+<!-- jquery 3.3.1 -->
+<script src="/userResource/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+<!-- bootstap bundle js -->
+<script src="/userResource/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- slimscroll js -->
+<script src="/userResource/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+<!-- main js -->
+<script src="/userResource/assets/libs/js/main-js.js"></script>
+<!-- chart chartist js -->
+<script src="/userResource/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+<!-- sparkline js -->
+<script src="/userResource/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+<!-- morris js -->
+<script src="/userResource/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+<script src="/userResource/assets/vendor/charts/morris-bundle/morris.js"></script>
+<!-- chart c3 js -->
+<script src="/userResource/assets/vendor/charts/c3charts/c3.min.js"></script>
+<script src="/userResource/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+<script src="/userResource/assets/vendor/charts/c3charts/C3chartjs.js"></script>
+<script src="/userResource/assets/libs/js/dashboard-ecommerce.js"></script>
+</body>
+<script>
+    function doChange(){
+        // g_showLoading();
+        var inputPass = $("#newPassword").val();
+        var inputPassRel = $("#newPasswordRel").val();
+        var originalPassword = $("#originalPassword").val();
+        if(inputPass!=inputPassRel){
+            layer.closeAll();
+            layer.msg("两次输入密码不一致！请重新输入");
+            return false;
+        }
+        var salt = g_passsword_salt;
+        var str = ""+salt.charAt(0)+salt.charAt(2) + inputPass +salt.charAt(5) + salt.charAt(4);
+        var str2 = ""+salt.charAt(0)+salt.charAt(2) + originalPassword +salt.charAt(5) + salt.charAt(4);
+        var newPassword = md5(str);
+        var originalPassword = md5(str2);
+        $.ajax({
+            url: "/student/changePass",
+            type: "POST",
+            data:{
+                newPassword:newPassword,
+                originalPassword:originalPassword
+            },
+            success:function(data){
+                layer.closeAll();
+                if(data.code == 0){
+                    layer.msg("修改成功");
+                        window.location.href="/student/info";
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(data){
+                layer.closeAll();
+                layer.msg(data.msg);
+            }
+        });
+    }
+</script>
+</html>
