@@ -25,4 +25,7 @@ public interface SpecialtyDao {
      * */
     @Select("select id  from specialty where college=#{college} and major=#{major} and grade=#{grade} and classname =#{classname}")
     public Integer getIdBySpecialty(Specialty specialty);
+
+    @Select("select * from specialty where id = #{specialtyId}")
+    Specialty getSpecialtyById(Integer specialtyId);
 }

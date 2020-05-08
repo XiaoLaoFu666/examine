@@ -36,4 +36,24 @@ public class JudgeService implements JudgeDao {
     public List<Judge> getMockJudges(int subjectId, int number) {
         return judgeDao.getMockJudges(subjectId,number);
     }
+
+    @Override
+    public int addJudge(Judge judge) {
+        return judgeDao.addJudge(judge);
+    }
+
+    @Override
+    public List<Judge> getJudgeListByAllSubjectId(Integer id) {
+        return judgeDao.getJudgeListByAllSubjectId(id);
+    }
+
+    @Override
+    public List<Judge> getJudgeListBySubjectId(Integer subjectId) {
+        return judgeDao.getJudgeListBySubjectId(subjectId);
+    }
+
+    @Override
+    public int deleteById(Integer judgeId) {
+        return judgeDao.deleteById(judgeId);
+    }
 }

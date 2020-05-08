@@ -54,11 +54,11 @@ public class ExamController {
      * 即将开始的（考试前五分钟会开启倒计时，时间到达之前点击button无法进入考试）
      * */
     @RequestMapping("/examStudent")
-    public String examStudent(HttpServletRequest request, HttpServletResponse response, Model model){
-        Student student = (Student) globalUserGet.getCurrentUser(request,response);
-        if(student == null){
+    public String examStudent(HttpServletRequest request, HttpServletResponse response, Model model,User user){
+        if(user == null){
             return "login";
         }
+        Student student = (Student) user;
         model.addAttribute("student",student);
         List<Exam> examList = examService.getExamByStudentId(student.getId(),1);
         List<ExamVo> examVos = new ArrayList<>();
@@ -280,14 +280,14 @@ public class ExamController {
         Page page = pageService.findPageById(exam.getPageid());
         int chooseTrueNum = examResultService.getTrueNum(student.getId(),examId,1);
         int judgeTrueNum = examResultService.getTrueNum(student.getId(),examId,2);
-        int score = chooseTrueNum * page.getChooseScore() + judgeTrueNum * page.getJudgeScore();
+        int score = chooseTrueNum * page.getChoosescore() + judgeTrueNum * page.getJudgescore();
         int result = examService.setScore(score,examId,student.getId());
         if(result !=1 ){
             return "error";
         }
         exam.setStatus(2);
         examService.updateExam(exam);
-        return examStudent(request,response,model);
+        return examStudent(request,response,model,user);
     }
 
     @RequestMapping(value = "/test")

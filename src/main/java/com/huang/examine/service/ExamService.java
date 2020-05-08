@@ -1,8 +1,11 @@
 package com.huang.examine.service;
 
 import com.huang.examine.dao.ExamDao;
+import com.huang.examine.dao.SpecialtyDao;
 import com.huang.examine.entity.Exam;
+import com.huang.examine.entity.Specialty;
 import com.huang.examine.entity.Student;
+import com.huang.examine.entityvo.StudentExamVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,9 @@ import java.util.List;
 public class ExamService implements ExamDao {
     @Autowired
     private ExamDao examDao;
+
+    @Autowired
+    private SpecialtyDao specialtyDao;
 
     @Override
     public List<Exam> getExamByStudentId(Integer userId, Integer type) {
@@ -59,5 +65,58 @@ public class ExamService implements ExamDao {
         return examDao.getExamStatus(studentId,examId);
     }
 
+    @Override
+    public List<Exam> getExamByTeacherId(Integer id) {
+        return examDao.getExamByTeacherId(id);
+    }
+
+    @Override
+    public int deleteByExamId(Integer examId) {
+        return examDao.deleteByExamId(examId);
+    }
+
+    @Override
+    public int deleteUserExamByEaxmId(Integer id, Integer examId) {
+        return examDao.deleteUserExamByEaxmId(id,examId);
+    }
+
+    @Override
+    public int addExam(Exam exam) {
+         return examDao.addExam(exam);
+    }
+
+    @Override
+    public int insertUserExam(Integer examId, Integer userId, Integer type) {
+        return examDao.insertUserExam(examId,userId,type);
+    }
+
+    @Override
+    public List<Exam> getTeacherExamOver(Integer teacherId) {
+        return examDao.getTeacherExamOver(teacherId);
+    }
+
+    @Override
+    public List<StudentExamVo> getStudentVoByExamId(Integer examId) {
+        return examDao.getStudentVoByExamId(examId);
+    }
+    /**
+     * 将specialty信息注入进去
+     * */
+    public List<StudentExamVo> getStudentVo(Integer examId) {
+        List<StudentExamVo> examVos = getStudentVoByExamId(examId);
+        for (StudentExamVo studentVo:examVos) {
+            Specialty specialty = specialtyDao.getSpecialtyById(studentVo.getSpecialtyId());
+            studentVo.setSpecialty(specialty);
+        }
+        return examVos;
+    }
+    /**
+     * 将考试添加后并对userexam表进行更新
+     * */
+    public int insertUser(Exam exam,Integer userid,Integer type){
+        examDao.addExam(exam);
+        int id = exam.getId();
+        return insertUserExam(id,userid,type);
+    }
 
 }

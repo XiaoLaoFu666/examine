@@ -20,6 +20,16 @@ public class Teacher extends User {
         this.examList = examList;
     }
 
+    private String sex;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public String role;
 
     @Override

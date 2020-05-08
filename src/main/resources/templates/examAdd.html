@@ -54,7 +54,7 @@
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="notification-info">
                                                 <div class="notification-list-user-img"><img src="/userResource/assets/images/avatar-3.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                <div class="notification-list-user-block"><span class="notification-list-user-name" th:text="${student.name}"></span>is now following you
+                                                <div class="notification-list-user-block"><span class="notification-list-user-name" th:text="${teacher.name}"></span>is now following you
                                                     <div class="notification-date">2 days ago</div>
                                                 </div>
                                             </div>
@@ -119,8 +119,8 @@
                         <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/userResource/assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
                         <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                             <div class="nav-user-info">
-                                <h5 class="mb-0 text-white nav-user-name"><div th:text="${student.name}"></div> </h5>
-                                <span class="status"></span><span class="ml-2"><div th:if="${student.role} eq 'student'" th:text="学生"></div></span>
+                                <h5 class="mb-0 text-white nav-user-name"><div th:text="${teacher.name}"></div> </h5>
+                                <span class="status"></span><span class="ml-2"><div th:if="${teacher.role} eq 'teacher'" th:text="老师"></div></span>
                             </div>
                             <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>设置</a>
                             <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>退出登录</a>
@@ -149,37 +149,32 @@
                             Menu
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active" href="#"><i class="fa fa-fw fa-user-circle"></i>个人中心</a>
+                            <a class="nav-link" href="/teacher/index"><i class="fa fa-fw fa-user-circle"></i>个人中心</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/exam/examStudent" ><i class="fa fa-fw fa-rocket"></i>考试中心</a>
+                            <a class="nav-link active" href="#" ><i class="fa fa-fw fa-rocket"></i>考试添加</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/student/info"><i class="fas fa-fw fa-chart-pie"></i>个人信息</a>
+                            <a class="nav-link" href="/teacher/examCheck"><i class="fas fa-fw fa-chart-pie"></i>考试查看</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="/examInquire" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
+                            <a class="nav-link" href="/teacher/resultInquiry" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-table"></i>考试预约</a>
-                        </li>
-                        <li class="nav-divider">
-                            Features
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/mockExam/" ><i class="fas fa-fw fa-file"></i> 模拟刷题 </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-inbox"></i>其他设置 <span class="badge badge-secondary">New</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-columns"></i>Icons</a>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-table"></i>题库录入</a>
+                            <div id="submenu-2" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/testBank/addChoose">选择题 <span class="badge badge-secondary">New</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/testBank/addJudge">判断题</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" ></i>Maps</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" ><i class="fas fa-f fa-folder"></i>Menu Level</a>
+                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-columns"></i>其它</a>
                         </li>
                     </ul>
                 </div>
@@ -193,7 +188,7 @@
     <!-- wrapper  -->
     <!-- ============================================================== -->
     <div class="dashboard-wrapper">
-        <div class="dashboard-ecommerce">
+        <div class="dashboard-influence">
             <div class="container-fluid dashboard-content ">
                 <!-- ============================================================== -->
                 <!-- pageheader  -->
@@ -201,12 +196,12 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">学生个人中心</h2>
+                            <h2 class="pageheader-title">教师个人中心</h2>
                             <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">个人中心</a></li>
+                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">考试添加</a></li>
                                     </ol>
                                 </nav>
                             </div>
@@ -218,83 +213,95 @@
                 <!-- ============================================================== -->
                 <div class="ecommerce-widget">
                     <div class="row">
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
-
-                            <div class="tab-regular">
-                                <ul class="nav nav-tabs " id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">考生个人信息</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="testIMG">
-                                            <span th:if="${student.sex} eq '男'">
-                                                <img src="/img/boy.jpg" width="150px" alt="头像">
-                                            </span>
-                                            <span th:if="${student.sex} eq '女'">
-                                                <img src="/img/girl.jpg" width="150px" alt="头像">
-                                            </span>
-                                            <p th:text="学号 + ':' + ${student.getUserId()}"></p>
+                        <!-- ============================================================== -->
+                        <!-- basic table  -->
+                        <!-- ============================================================== -->
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="card influencer-profile-data">
+                                <div class="card-body">
+                                    <form action="/teacher/addExam/add" id="examForm" data-parsley-validate="">
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="card">
+                                                    <h5 class="card-header">考试信息</h5>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label for="name">考试名称</label>
+                                                            <input id="name" type="text"  name="name" data-parsley-trigger="change" required=""  autocomplete="off" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="time">考试时间</label>
+                                                            <input id="time" type="text" name="time"  data-parsley-trigger="change" required="" autocomplete="off" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="date">开始时间</label>
+                                                            <input id="date" name="date" type="datetime-local"  required="" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="date">结束时间</label>
+                                                            <input id="endTime" name="endTime" type="datetime-local" required="" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">考试科目</label>
+                                                            <select class="form-control" id="subject" name="subject">
+                                                                <option>--请选择考试科目--</option>
+                                                                <option th:each="subject : ${subjectList}" th:value="${subject}">
+                                                                    [[${subject}]]
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="card">
+                                                    <h5 class="card-header">试卷信息</h5>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label for="name">试卷名称</label>
+                                                            <input id="pagename" type="text" name="pagename"  data-parsley-trigger="change" required=""  autocomplete="off" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">选择题数量</label>
+                                                            <input id="choosenum" type="number" name="choosenum"  data-parsley-trigger="change" required=""  autocomplete="off" class="form-control" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">选择题分值</label>
+                                                            <input id="chooseScore" type="number" name="chooseScore" data-parsley-trigger="change" required="" placeholder="2" autocomplete="off" class="form-control" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">判断题数量</label>
+                                                            <input id="judgenum" type="number" name="judgenum"  data-parsley-trigger="change" required=""  autocomplete="off" class="form-control" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">判断题分值</label>
+                                                            <input id="judgeScore" type="number" name="judgeScore" data-parsley-trigger="change" required=""  placeholder="1" autocomplete="off" class="form-control" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">试卷说明</label>
+                                                            <textarea id="pageinfo" type="text" name="pageinfo"  data-parsley-trigger="change" required=""  autocomplete="off" class="form-control">
+                                                            </textarea>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 pl-0">
+                                                                <p class="text-right">
+                                                                    <button type="submit" class="btn btn-space btn-primary">保存</button>
+                                                                    <button class="btn btn-space btn-secondary" type="reset">取消</button>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="testTXT">
-                                            <p th:text="姓名 + ':' + ${student.getName()}"></p>
-                                            <p th:text="性别 + ':' + ${student.getSex()}"></p>
-                                            <p th:text="学院 + ':' + ${student.specialty.getCollege()}"></p>
-                                            <p th:text="专业 + ':' + ${student.specialty.getMajor()}" ></p>
-                                            <p th:text="年级 + ':' + ${student.specialty.getGrade()} + ${student.specialty.getClassname()}"></p>
-                                        </div>
-                                        <a href="/student/info" class="btn btn-secondary">点击修改信息</a>
-                                    </div>
+                                    </form>
                                 </div>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="row">
-                        <!-- recent orders  -->
-                        <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">考试信息表</h5>
-                                <div class="card-body p-0">
-                                    <div class="table-responsive">
-                                        <table class="table" >
-                                            <thead class="bg-light">
-                                            <tr class="border-0">
-                                                <th class="border-0">#</th>
-                                                <th class="border-0">考试编号</th>
-                                                <th class="border-0">考试名称</th>
-                                                <th class="border-0">考试科目</th>
-                                                <th class="border-0">考试时长</th>
-                                                <th class="border-0">考试时间</th>
-                                                <th class="border-0">考试状态</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="exam:${student.examList}">
-                                                <td>1</td>
-                                                <td th:text="${exam.number}"></td>
-                                                <td th:text="${exam.name}"></td>
-                                                <td th:text="${exam.course}"></td>
-                                                <td th:text="${exam.time} + 分钟"></td>
-                                                <td th:text="${#dates.format(exam.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                                <td th:switch="${exam.status}">
-                                                    <div th:case="1"><span class="badge-dot badge-brand mr-1"></span>未开始</div>
-                                                    <div th:case="2"><span class="badge-dot badge-dark mr-1"></span>已结束</div>
-                                                    <div th:case="3"><span class="badge-dot badge-success mr-1"></span>进行中</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="9"><a href="#" class="btn btn-outline-light float-right">查看详情</a></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <!-- ============================================================== -->
-                        <!-- end recent orders  -->
+                        <!-- end basic table  -->
+                        <!-- ============================================================== -->
                     </div>
 
                 </div>
@@ -311,9 +318,9 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="text-md-right footer-links d-none d-sm-block">
-                            <a href="javascript: void(0);">About</a>
-                            <a href="javascript: void(0);">Support</a>
-                            <a href="javascript: void(0);">Contact Us</a>
+                            <a href="javascript: void(0);">关于</a>
+                            <a href="javascript: void(0);">支持</a>
+                            <a href="javascript: void(0);">联系我们</a>
                         </div>
                     </div>
                 </div>
@@ -353,13 +360,5 @@
 <script src="/userResource/assets/libs/js/dashboard-ecommerce.js"></script>
 </body>
 <script>
-    $(function(){
-        //$('table tr:not(:first)').remove();
-        var len = $('table tr').length;
-        for(var i = 1;i<len-1;i++){
-            $('table tr:eq('+i+') td:first').text(i);
-        }
-
-    });
 </script>
 </html>

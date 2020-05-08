@@ -1,10 +1,9 @@
 package com.huang.examine.dao;
 
 import com.huang.examine.entity.Exam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.huang.examine.entity.UserExam;
+import com.huang.examine.entityvo.StudentExamVo;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -56,6 +55,38 @@ public interface ExamDao {
     @Select("select status from userexam where user = #{studentId} and exam = #{examId} and usertype = 1")
     boolean getExamStatus(Integer studentId,Integer examId);
 
+    @Select("select * from exam where id in(select exam from userexam where user = #{id} and usertype = 2 ) order by date ASC")
+    List<Exam> getExamByTeacherId(Integer id);
 
+    @Delete("delete from exam where id = #{examId}")
+    int deleteByExamId(Integer examId);
+
+    @Delete("delete from userexam where exam = #{examId} and user = #{id} and usertype = 2")
+    int deleteUserExamByEaxmId(Integer id, Integer examId);
+
+    @Insert("insert into exam (name, time, \n" +
+            "      date, endTime,course, pageId, \n" +
+            "      status, number)\n" +
+            "    values (#{name,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER}, \n" +
+            "      #{date,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP}, #{course,jdbcType=VARCHAR}, #{pageid,jdbcType=INTEGER}, \n" +
+            "      #{status,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR})")
+    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
+    int addExam(Exam exam);
+
+    @Insert("insert into userexam (user, exam,usertype,status)\n" +
+            "values (#{userId}, #{examId}, #{type},0)")
+    int insertUserExam(Integer examId,Integer userId,Integer type);
+
+    /**
+     * 查询教师安排的已结束的考试
+     * */
+    @Select("select distinct * from exam where status = 2 and id in (select exam from userexam where user = #{teacherId} and usertype = 2) order by endTime desc")
+    List<Exam> getTeacherExamOver(Integer teacherId);
+
+    /**
+     * 通过考试ID查询所有参见该堂考试的学生ID
+     * */
+    @Select("select userexam.user,userexam.score,student.name,student.specialtyId,student.sex,student.userId from userexam left join student on userexam.user = student.id where userexam.usertype = 1 and userexam.exam = #{examId} order by specialtyId asc,userId asc;")
+    List<StudentExamVo> getStudentVoByExamId(Integer examId);
 
 }

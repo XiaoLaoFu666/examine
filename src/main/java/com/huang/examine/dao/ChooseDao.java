@@ -1,10 +1,7 @@
 package com.huang.examine.dao;
 
 import com.huang.examine.entity.Choose;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -38,6 +35,22 @@ public interface ChooseDao {
     /**
      * 随机获取指定数目、题型的的题目
      * */
-    @Select("SELECT * FROM choose WHERE  subjectId = #{subjectId} and id >= ((SELECT MAX(id) FROM choose)-(SELECT MIN(id) FROM choose)) * RAND() + (SELECT MIN(id) FROM choose) LIMIT #{number}")
+    @Select("select * from choose where subjectId=#{subjectId} order by rand() limit #{number}")
     List<Choose> getMockChooses(int subjectId, int number);
+    @Insert(" insert into choose (responseA, responseB, \n" +
+            "      responseC, responseD, response, \n" +
+            "      question,subjectId)\n" +
+            "    values (#{responsea,jdbcType=VARCHAR}, #{responseb,jdbcType=VARCHAR}, \n" +
+            "      #{responsec,jdbcType=VARCHAR}, #{responsed,jdbcType=VARCHAR}, #{response,jdbcType=VARCHAR}, \n" +
+            "      #{question,jdbcType=LONGVARCHAR},#{subjectId})")
+    int addChoose(Choose choose);
+
+    @Select("select * from choose where subjectId in (select subjectId from sbjther where teacherId = #{id}) order by subjectId")
+    List<Choose> getChooseListByAllSubjectId(Integer id);
+
+    @Select("select * from choose where subjectId = #{subjectId}")
+    List<Choose> getChooseListBySubjectId(Integer subjectId);
+
+    @Delete("delete from choose where id = #{chooseId}")
+    void deleteById(Integer chooseId);
 }

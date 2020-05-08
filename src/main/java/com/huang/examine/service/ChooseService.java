@@ -36,4 +36,26 @@ public class ChooseService implements ChooseDao {
     public List<Choose> getMockChooses(int subjectId, int number) {
         return chooseDao.getMockChooses(subjectId,number);
     }
+
+    @Override
+    public int addChoose(Choose choose) {
+        return chooseDao.addChoose(choose);
+    }
+
+    @Override
+    public List<Choose> getChooseListByAllSubjectId(Integer id) {
+        return chooseDao.getChooseListByAllSubjectId(id);
+    }
+
+    @Override
+    public List<Choose> getChooseListBySubjectId(Integer subjectId) {
+        return chooseDao.getChooseListBySubjectId(subjectId);
+    }
+
+    @Override
+    public void deleteById(Integer chooseId) {
+        chooseDao.deleteById(chooseId);
+    }
+
+
 }
