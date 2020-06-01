@@ -123,7 +123,7 @@
                                 <span class="status"></span><span class="ml-2"><div th:if="${teacher.role} eq 'student'" th:text="学生"></div></span>
                             </div>
                             <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>设置</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>退出登录</a>
+                            <a class="dropdown-item" href="/signOut"><i class="fas fa-power-off mr-2"></i>退出登录</a>
                         </div>
                     </li>
                 </ul>
@@ -155,10 +155,10 @@
                             <a class="nav-link" href="/teacher/addExam" ><i class="fa fa-fw fa-rocket"></i>考试添加</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="#"><i class="fas fa-fw fa-chart-pie"></i>考试查看</a>
+                            <a class="nav-link active" href="#"><i class="fas fa-fw fa-chart-pie"></i>考试查看</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active" href="/teacher/resultInquiry" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
+                            <a class="nav-link " href="/teacher/resultInquiry" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-table"></i>题库录入</a>

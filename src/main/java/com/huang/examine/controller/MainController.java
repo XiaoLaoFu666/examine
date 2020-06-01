@@ -2,6 +2,10 @@ package com.huang.examine.controller;
 
 import com.huang.examine.entity.LoginVo;
 import com.huang.examine.entity.Student;
+import com.huang.examine.entity.User;
+import com.huang.examine.redis.RedisService;
+import com.huang.examine.redis.StudentKey;
+import com.huang.examine.redis.TeacherKey;
 import com.huang.examine.result.CodeMsg;
 import com.huang.examine.result.Result;
 import com.huang.examine.service.StudentService;
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -34,6 +39,11 @@ public class MainController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GlobalUserGet globalUserGet;
+
+    @Autowired
+    private RedisService redisService;
 
 
     @RequestMapping
@@ -53,6 +63,21 @@ public class MainController {
     public String indexC(){
         Student student = studentService.getStudentById(1);
         return "hello examine" + student.getName() + student.getUserId();
+    }
+
+    /**
+     * 退出登录动作
+     * */
+    @RequestMapping("/signOut")
+    public String signOut(HttpServletResponse response, HttpServletRequest request, User user){
+        if(user == null){
+            user = globalUserGet.getTeacher(request, response);
+            redisService.delete(TeacherKey.token);
+        }else {
+            redisService.delete(StudentKey.token);
+        }
+
+        return "login";
     }
 
 }
