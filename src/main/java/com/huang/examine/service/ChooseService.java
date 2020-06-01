@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: HuangJunHao
@@ -55,6 +56,26 @@ public class ChooseService implements ChooseDao {
     @Override
     public void deleteById(Integer chooseId) {
         chooseDao.deleteById(chooseId);
+    }
+
+    @Override
+    public int getCount() {
+        return chooseDao.getCount();
+    }
+
+    @Override
+    public List<Choose> pageList(Map map) {
+        return chooseDao.pageList(map);
+    }
+
+    @Override
+    public int getSubjectCount(Integer subjectId) {
+        return chooseDao.getSubjectCount(subjectId);
+    }
+
+    @Override
+    public List<Choose> pageSubjectList(Map map) {
+        return chooseDao.pageSubjectList(map);
     }
 
 

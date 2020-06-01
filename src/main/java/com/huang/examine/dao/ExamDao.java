@@ -6,6 +6,7 @@ import com.huang.examine.entityvo.StudentExamVo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -89,4 +90,12 @@ public interface ExamDao {
     @Select("select userexam.user,userexam.score,student.name,student.specialtyId,student.sex,student.userId from userexam left join student on userexam.user = student.id where userexam.usertype = 1 and userexam.exam = #{examId} order by specialtyId asc,userId asc;")
     List<StudentExamVo> getStudentVoByExamId(Integer examId);
 
+    @Update("update exam set status = 1 where  date > #{date}")
+    void updateStatus1(Date date);
+
+    @Update("update exam set status = 3 where  date < #{date} and endTime > #{date}")
+    void updateStatus2(Date date);
+
+    @Update("update exam set status = 2 where  endTime< #{date}")
+    void updateStatus3(Date date);
 }

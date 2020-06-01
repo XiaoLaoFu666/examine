@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: HuangJunHao
@@ -44,4 +45,16 @@ public interface JudgeDao {
 
     @Delete("delete from judge where id = #{judgeId}")
     int deleteById(Integer judgeId);
+
+    @Select("select count(*) from judge")
+    int getCount();
+
+    @Select("select * from judge limit #{pageNo},#{pageSize}")
+    List<Judge> pageList(Map map);
+
+    @Select("select count(*) from judge where subjectId=#{subjectId}")
+    int getSubjectCount(Integer subjectId);
+
+    @Select("select * from judge where subjectId= #{subjectId} limit #{pageNo},#{pageSize}")
+    List<Judge> pageSubjectList(Map map);
 }

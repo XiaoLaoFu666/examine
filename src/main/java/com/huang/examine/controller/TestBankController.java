@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 题库管理
@@ -121,10 +123,43 @@ public class TestBankController {
         }
         Teacher teacher = (Teacher) user;
         List<Subject> subjectList = subjectService.getSubjectList(teacher.getId());
-        List<Choose> chooseList = chooseService.getChooseListByAllSubjectId(teacher.getId());
         String subjectName = "全部科目";
         model.addAttribute("subjectName",subjectName);
+        String spPage=request.getParameter("pageNumber");
+        //设置每页条数
+        int pageSize=10;
+        //页数
+        int pageNo=0;
+        if(spPage==null){
+            pageNo=1;
+        }else {
+            pageNo = Integer.valueOf(spPage);
+            if (pageNo < 1) {
+                pageNo = 1;
+            }
+        }
+        //设置最大页数
+        int totalCount=0;
+        int count=chooseService.getCount();
+        if(count>0){
+            totalCount=count;
+        }
+        int maxPage=totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
+        if(pageNo>maxPage){
+            pageNo=maxPage;
+        }
+        int tempPageNo=(pageNo-1)*pageSize;
+        //计算总数量
+        //分页查询
+        Map map=new HashMap();
+        map.put("pageNo",tempPageNo);
+        map.put("pageSize",pageSize);
+        List<Choose> chooseList=chooseService.pageList(map);
+        //最后把信息放入model转发到页面把信息带过去
         model.addAttribute("chooseList",chooseList);
+        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("totalCount",totalCount);
+        model.addAttribute("maxPage",maxPage);
         model.addAttribute("subjectList",subjectList);
         model.addAttribute("teacher",teacher);
         return "chooseCheck";
@@ -139,10 +174,46 @@ public class TestBankController {
         Teacher teacher = (Teacher) user;
         Integer subjectId = Integer.parseInt(request.getParameter("subjectId"));
         List<Subject> subjectList = subjectService.getSubjectList(teacher.getId());
-        List<Choose> chooseList = chooseService.getChooseListBySubjectId(subjectId);
-        String subjectName = subjectService.getNameById(subjectId);
-        model.addAttribute("subjectName",subjectName);
+        String spPage=request.getParameter("pageNumber");
+        //设置每页条数
+        int pageSize=10;
+        //页数
+        int pageNo=0;
+        if(spPage==null){
+            pageNo=1;
+        }else {
+            pageNo = Integer.valueOf(spPage);
+            if (pageNo < 1) {
+                pageNo = 1;
+            }
+        }
+        //设置最大页数
+        int totalCount=0;
+        int count=judgeService.getSubjectCount(subjectId);
+        if(count>0){
+            totalCount=count;
+        }
+        int maxPage=totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
+        if(pageNo>maxPage){
+            pageNo=maxPage;
+        }
+        int tempPageNo=(pageNo-1)*pageSize;
+        //计算总数量
+        //分页查询
+        Map map=new HashMap();
+        map.put("subjectId",subjectId);
+        map.put("pageNo",tempPageNo);
+        map.put("pageSize",pageSize);
+        List<Choose> chooseList=chooseService.pageSubjectList(map);
+        //最后把信息放入model转发到页面把信息带过去
         model.addAttribute("chooseList",chooseList);
+        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("totalCount",totalCount);
+        model.addAttribute("maxPage",maxPage);
+        model.addAttribute("teacher",teacher);
+        String subjectName = subjectService.getNameById(subjectId);
+        model.addAttribute("subjectId",subjectId);
+        model.addAttribute("subjectName",subjectName);
         model.addAttribute("subjectList",subjectList);
         model.addAttribute("teacher",teacher);
         return "chooseCheck";
@@ -156,14 +227,49 @@ public class TestBankController {
         }
         Teacher teacher = (Teacher) user;
         List<Subject> subjectList = subjectService.getSubjectList(teacher.getId());
-        List<Judge> judgeList = judgeService.getJudgeListByAllSubjectId(teacher.getId());
         String subjectName = "全部科目";
         model.addAttribute("subjectName",subjectName);
+        String spPage=request.getParameter("pageNumber");
+        //设置每页条数
+        int pageSize=10;
+        //页数
+        int pageNo=0;
+        if(spPage==null){
+            pageNo=1;
+        }else {
+            pageNo = Integer.valueOf(spPage);
+            if (pageNo < 1) {
+                pageNo = 1;
+            }
+        }
+        //设置最大页数
+        int totalCount=0;
+        int count=judgeService.getCount();
+        if(count>0){
+            totalCount=count;
+        }
+        int maxPage=totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
+        if(pageNo>maxPage){
+            pageNo=maxPage;
+        }
+        int tempPageNo=(pageNo-1)*pageSize;
+        //计算总数量
+        //分页查询
+        Map map=new HashMap();
+        map.put("pageNo",tempPageNo);
+        map.put("pageSize",pageSize);
+        List<Judge> judgeList=judgeService.pageList(map);
+        //最后把信息放入model转发到页面把信息带过去
         model.addAttribute("judgeList",judgeList);
+        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("totalCount",totalCount);
+        model.addAttribute("maxPage",maxPage);
         model.addAttribute("subjectList",subjectList);
         model.addAttribute("teacher",teacher);
         return "judgeCheck";
     }
+
+
 
     @RequestMapping("/judgeCheck/subject")
     public String judgeCheckBySubjectId(HttpServletRequest request, HttpServletResponse response, Model model){
@@ -174,10 +280,46 @@ public class TestBankController {
         Teacher teacher = (Teacher) user;
         Integer subjectId = Integer.parseInt(request.getParameter("subjectId"));
         List<Subject> subjectList = subjectService.getSubjectList(teacher.getId());
-        List<Judge> judgeList = judgeService.getJudgeListBySubjectId(subjectId);
-        String subjectName = subjectService.getNameById(subjectId);
-        model.addAttribute("subjectName",subjectName);
+        String spPage=request.getParameter("pageNumber");
+        //设置每页条数
+        int pageSize=10;
+        //页数
+        int pageNo=0;
+        if(spPage==null){
+            pageNo=1;
+        }else {
+            pageNo = Integer.valueOf(spPage);
+            if (pageNo < 1) {
+                pageNo = 1;
+            }
+        }
+        //设置最大页数
+        int totalCount=0;
+        int count=judgeService.getSubjectCount(subjectId);
+        if(count>0){
+            totalCount=count;
+        }
+        int maxPage=totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
+        if(pageNo>maxPage){
+            pageNo=maxPage;
+        }
+        int tempPageNo=(pageNo-1)*pageSize;
+        //计算总数量
+        //分页查询
+        Map map=new HashMap();
+        map.put("subjectId",subjectId);
+        map.put("pageNo",tempPageNo);
+        map.put("pageSize",pageSize);
+        List<Judge> judgeList=judgeService.pageSubjectList(map);
+        //最后把信息放入model转发到页面把信息带过去
         model.addAttribute("judgeList",judgeList);
+        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("totalCount",totalCount);
+        model.addAttribute("maxPage",maxPage);
+        model.addAttribute("teacher",teacher);
+        String subjectName = subjectService.getNameById(subjectId);
+        model.addAttribute("subjectId",subjectId);
+        model.addAttribute("subjectName",subjectName);
         model.addAttribute("subjectList",subjectList);
         model.addAttribute("teacher",teacher);
         return "judgeCheck";
@@ -201,7 +343,7 @@ public class TestBankController {
         model.addAttribute("chooseList",chooseList);
         model.addAttribute("subjectList",subjectList);
         model.addAttribute("teacher",teacher);
-        return "chooseCheck";
+        return chooseCheck(request,response,model);
     }
 
     @RequestMapping("/judgeCheck/delete")
@@ -222,6 +364,6 @@ public class TestBankController {
         model.addAttribute("judgeList",judgeList);
         model.addAttribute("subjectList",subjectList);
         model.addAttribute("teacher",teacher);
-        return "chooseCheck";
+        return judgeCheck(request,response,model);
     }
 }

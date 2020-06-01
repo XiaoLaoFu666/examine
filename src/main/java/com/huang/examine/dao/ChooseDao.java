@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: HuangJunHao
@@ -53,4 +54,16 @@ public interface ChooseDao {
 
     @Delete("delete from choose where id = #{chooseId}")
     void deleteById(Integer chooseId);
+
+    @Select("select count(*) from choose")
+    int getCount();
+
+    @Select("select * from choose limit #{pageNo},#{pageSize}")
+    List<Choose> pageList(Map map);
+
+    @Select("select count(*) from choose where subjectId=#{subjectId}")
+    int getSubjectCount(Integer subjectId);
+
+    @Select("select * from choose where subjectId= #{subjectId} limit #{pageNo},#{pageSize}")
+    List<Choose> pageSubjectList(Map map);
 }

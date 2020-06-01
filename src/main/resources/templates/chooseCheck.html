@@ -286,6 +286,18 @@
                                             <tfoot>
                                             </tfoot>
                                         </table>
+                                        <span th:if="${subjectName} eq '全部科目'">
+                                            <a th:href="'/testBank/chooseCheck?pageNumber=1'">首页</a>
+                                            <a th:href="'/testBank/chooseCheck?pageNumber='+${pageNo - 1}">上一页</a>
+                                            <a th:href="'/testBank/chooseCheck?pageNumber='+${pageNo + 1}">下一页</a>
+                                            <a th:href="'/testBank/chooseCheck?pageNumber='+${maxPage}">尾页</a>
+                                        </span>
+                                        <span th:if="${subjectName} != '全部科目'">
+                                            <a th:href="@{/testBank/chooseCheck/subject(pageNumber=1,subjectId=${subjectId})}">首页</a>
+                                            <a th:href="@{/testBank/chooseCheck/subject(pageNumber=${pageNo - 1},subjectId=${subjectId})}">上一页</a>
+                                            <a th:href="@{/testBank/chooseCheck/subject(pageNumber=${pageNo + 1},subjectId=${subjectId})}">下一页</a>
+                                            <a th:href="@{/testBank/chooseCheck/subject(pageNumber=${maxPage},subjectId=${subjectId})}">尾页</a>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

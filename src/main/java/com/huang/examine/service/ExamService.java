@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -99,6 +100,22 @@ public class ExamService implements ExamDao {
     public List<StudentExamVo> getStudentVoByExamId(Integer examId) {
         return examDao.getStudentVoByExamId(examId);
     }
+
+    @Override
+    public void updateStatus1(Date date) {
+
+    }
+
+    @Override
+    public void updateStatus2(Date date) {
+
+    }
+
+    @Override
+    public void updateStatus3(Date date) {
+
+    }
+
     /**
      * 将specialty信息注入进去
      * */
@@ -119,4 +136,9 @@ public class ExamService implements ExamDao {
         return insertUserExam(id,userid,type);
     }
 
+    public void updateExamStatus(Date date) {
+        examDao.updateStatus1(date);
+        examDao.updateStatus2(date);
+        examDao.updateStatus3(date);
+    }
 }

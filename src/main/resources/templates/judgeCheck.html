@@ -232,7 +232,7 @@
                                         <div class="col-xl-10 col-lg-8 col-md-8 col-sm-8 col-12">
                                             <div class="user-avatar-info">
                                                 <div class="user-avatar-address">
-                                                    <form action="/testBank/chooseCheck/subject" method="post">
+                                                    <form action="/testBank/judgeCheck/subject" method="post">
                                                         <h3>选择试题科目：</h3>
                                                         <span th:each=" subject:${subjectList}">
                                                             <label class="custom-control custom-radio custom-control-inline">
@@ -249,6 +249,7 @@
                                 </div>
 
                             </div>
+                     <form>
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="card">
                                 <h5 class="card-header">判断题</h5>
@@ -270,17 +271,30 @@
                                                 <td th:text="${judge.question}"></td>
                                                 <td th:text="${judge.response}"></td>
                                                 <td>
-                                                    <a class="alert-danger" onclick="{return confirm('确定删除本条记录？')}" th:href="'/testBank/judgeCheck/delete?judgeId = ' + ${judge.id}">删除</a>
+                                                    <a class="alert-danger" onclick="{return confirm('确定删除本条记录？')}" th:href="'/testBank/judgeCheck/delete?judgeId='+${judge.id}">删除</a>
                                                 </td>
                                             </tr>
                                             </tbody>
                                             <tfoot>
                                             </tfoot>
                                         </table>
+                                        <span th:if="${subjectName} eq '全部科目'">
+                                            <a th:href="'/testBank/judgeCheck?pageNumber=1'">首页</a>
+                                            <a th:href="'/testBank/judgeCheck?pageNumber='+${pageNo - 1}">上一页</a>
+                                            <a th:href="'/testBank/judgeCheck?pageNumber='+${pageNo + 1}">下一页</a>
+                                            <a th:href="'/testBank/judgeCheck?pageNumber='+${maxPage}">尾页</a>
+                                        </span>
+                                        <span th:if="${subjectName} != '全部科目'">
+                                            <a th:href="@{/testBank/judgeCheck/subject(pageNumber=1,subjectId=${subjectId})}">首页</a>
+                                            <a th:href="@{/testBank/judgeCheck/subject(pageNumber=${pageNo - 1},subjectId=${subjectId})}">上一页</a>
+                                            <a th:href="@{/testBank/judgeCheck/subject(pageNumber=${pageNo + 1},subjectId=${subjectId})}">下一页</a>
+                                            <a th:href="@{/testBank/judgeCheck/subject(pageNumber=${maxPage},subjectId=${subjectId})}">尾页</a>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                     </form>
                         <!-- ============================================================== -->
                         <!-- end basic table  -->
                         <!-- ============================================================== -->

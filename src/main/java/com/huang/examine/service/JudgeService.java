@@ -2,10 +2,12 @@ package com.huang.examine.service;
 
 import com.huang.examine.dao.JudgeDao;
 import com.huang.examine.entity.Judge;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: HuangJunHao
@@ -55,5 +57,25 @@ public class JudgeService implements JudgeDao {
     @Override
     public int deleteById(Integer judgeId) {
         return judgeDao.deleteById(judgeId);
+    }
+
+    @Override
+    public int getCount() {
+        return judgeDao.getCount();
+    }
+
+    @Override
+    public List<Judge> pageList(Map map) {
+        return judgeDao.pageList(map);
+    }
+
+    @Override
+    public int getSubjectCount(Integer subjectId) {
+        return judgeDao.getSubjectCount(subjectId);
+    }
+
+    @Override
+    public List<Judge> pageSubjectList(Map map) {
+        return judgeDao.pageSubjectList(map);
     }
 }
