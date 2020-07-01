@@ -137,7 +137,7 @@
                                 <span class="status"></span><span class="ml-2"><div th:if="${student.role} eq 'student'" th:text="学生"></div></span>
                             </div>
                             <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>设置</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>退出登录</a>
+                            <a class="dropdown-item" href="/signOut"><i class="fas fa-power-off mr-2"></i>退出登录</a>
                         </div>
                     </li>
                 </ul>
@@ -240,8 +240,15 @@
                             <div class="card-body">
                                 <form id="infoForm" name="infoForm" method="post" action="/student/changeInfo">
                                     <div class="form-group">
-                                        <img src="/img/1.jpg" width="150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="submit" class="btn btn-space btn-primary">点击上传头像</button>                                    </div>
+                                        <div th:if="${student.sex == '男'}">
+                                        <img src="/img/boy.jpg" width="150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" class="btn btn-space btn-primary">点击上传头像</button>
+                                        </div>
+                                        <div th:if="${student.sex == '女'}">
+                                            <img src="/img/girl.jpg" width="150px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" class="btn btn-space btn-primary">点击上传头像</button>
+                                        </div>
+                                                                           </div>
                                     <div class="form-group">
                                         <label for="studentNumber" class="col-form-label">学号</label>
                                         <input id="studentNumber" type="text" class="form-control" th:value="${student.userId}" readonly="true">

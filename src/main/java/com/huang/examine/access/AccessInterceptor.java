@@ -69,7 +69,17 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter {
 		}
 		return true;
 	}
-	
+
+	public User getTeacherUser(HttpServletRequest request, HttpServletResponse response) {
+		String paramToken = request.getParameter(UserService.COOKI_NAME_TOKEN);
+		String cookieToken = getCookieValue(request, UserService.COOKI_NAME_TOKEN);
+		if(StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {
+			return null;
+		}
+		String token = StringUtils.isEmpty(paramToken)?cookieToken:paramToken;
+		return userService.getTeacherByToken(response, token);
+	}
+
 	private void render(HttpServletResponse response, CodeMsg cm)throws Exception {
 		response.setContentType("application/json;charset=UTF-8");
 		OutputStream out = response.getOutputStream();

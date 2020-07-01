@@ -54,7 +54,7 @@
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="notification-info">
                                                 <div class="notification-list-user-img"><img src="/userResource/assets/images/avatar-3.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                <div class="notification-list-user-block"><span class="notification-list-user-name" th:text="${student.name}"></span>is now following you
+                                                <div class="notification-list-user-block"><span class="notification-list-user-name" th:text="${teacher.name}"></span>is now following you
                                                     <div class="notification-date">2 days ago</div>
                                                 </div>
                                             </div>
@@ -119,8 +119,8 @@
                         <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/userResource/assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
                         <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                             <div class="nav-user-info">
-                                <h5 class="mb-0 text-white nav-user-name"><div th:text="${student.name}"></div> </h5>
-                                <span class="status"></span><span class="ml-2"><div th:if="${student.role} eq 'student'" th:text="学生"></div></span>
+                                <h5 class="mb-0 text-white nav-user-name"><div th:text="${teacher.name}"></div> </h5>
+                                <span class="status"></span><span class="ml-2"><div th:if="${teacher.role} eq 'student'" th:text="学生"></div></span>
                             </div>
                             <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>设置</a>
                             <a class="dropdown-item" href="/signOut"><i class="fas fa-power-off mr-2"></i>退出登录</a>
@@ -152,34 +152,29 @@
                             <a class="nav-link active" href="#"><i class="fa fa-fw fa-user-circle"></i>个人中心</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/exam/examStudent" ><i class="fa fa-fw fa-rocket"></i>考试中心</a>
+                            <a class="nav-link" href="/teacher/addExam" ><i class="fa fa-fw fa-rocket"></i>考试添加</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/student/info"><i class="fas fa-fw fa-chart-pie"></i>个人信息</a>
+                            <a class="nav-link" href="/teacher/examCheck"><i class="fas fa-fw fa-chart-pie"></i>考试查看</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="/examInquire" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
+                            <a class="nav-link" href="/teacher/resultInquiry" ><i class="fab fa-fw fa-wpforms"></i>成绩查询</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-table"></i>考试预约</a>
-                        </li>
-                        <li class="nav-divider">
-                            Features
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/mockExam/" ><i class="fas fa-fw fa-file"></i> 模拟刷题 </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-inbox"></i>其他设置 <span class="badge badge-secondary">New</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-columns"></i>Icons</a>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-table"></i>题库录入</a>
+                            <div id="submenu-2" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/testBank/addChoose">选择题 <span class="badge badge-secondary">New</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/testBank/addChoose">判断题</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" ></i>Maps</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" ><i class="fas fa-f fa-folder"></i>Menu Level</a>
+                            <a class="nav-link" href="#" ><i class="fas fa-fw fa-columns"></i>其它</a>
                         </li>
                     </ul>
                 </div>
@@ -193,7 +188,7 @@
     <!-- wrapper  -->
     <!-- ============================================================== -->
     <div class="dashboard-wrapper">
-        <div class="dashboard-ecommerce">
+        <div class="dashboard-influence">
             <div class="container-fluid dashboard-content ">
                 <!-- ============================================================== -->
                 <!-- pageheader  -->
@@ -201,7 +196,7 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">学生个人中心</h2>
+                            <h2 class="pageheader-title">教师个人中心</h2>
                             <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
@@ -217,84 +212,104 @@
                 <!-- end pageheader  -->
                 <!-- ============================================================== -->
                 <div class="ecommerce-widget">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
 
-                            <div class="tab-regular">
-                                <ul class="nav nav-tabs " id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">考生个人信息</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="testIMG">
-                                            <span th:if="${student.sex} eq '男'">
-                                                <img src="/img/boy.jpg" width="150px" alt="头像">
-                                            </span>
-                                            <span th:if="${student.sex} eq '女'">
-                                                <img src="/img/girl.jpg" width="150px" alt="头像">
-                                            </span>
-                                            <p th:text="学号 + ':' + ${student.getUserId()}"></p>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="card influencer-profile-data">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                            <div class="text-center">
+                                                <img src="/img/boy.jpg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+                                            </div>
                                         </div>
-                                        <div class="testTXT">
-                                            <p th:text="姓名 + ':' + ${student.getName()}"></p>
-                                            <p th:text="性别 + ':' + ${student.getSex()}"></p>
-                                            <p th:text="学院 + ':' + ${student.specialty.getCollege()}"></p>
-                                            <p th:text="专业 + ':' + ${student.specialty.getMajor()}" ></p>
-                                            <p th:text="年级 + ':' + ${student.specialty.getGrade()} + ${student.specialty.getClassname()}"></p>
+                                        <div class="col-xl-10 col-lg-8 col-md-8 col-sm-8 col-12">
+                                            <div class="user-avatar-info">
+                                                <div class="m-b-20">
+                                                    <div class="user-avatar-name">
+                                                        <h2 class="mb-1" th:text="${teacher.name}"></h2>
+                                                    </div>
+                                                    <div class="rating-star  d-inline-block">
+                                                        <i class="fa fa-fw fa-star"></i>
+                                                        <i class="fa fa-fw fa-star"></i>
+                                                        <i class="fa fa-fw fa-star"></i>
+                                                        <i class="fa fa-fw fa-star"></i>
+                                                        <i class="fa fa-fw fa-star"></i>
+                                                        <p class="d-inline-block text-dark">综合指数</p>
+                                                    </div>
+                                                </div>
+                                                <div class="user-avatar-address">
+                                                    <p class="border-bottom pb-3">
+                                                        <span class="d-xl-inline-block d-block mb-2" th:text="工号 + ': '+ ${teacher.userId}"></span>
+                                                        <span class="mb-2 ml-xl-4 d-xl-inline-block d-block" th:text="年龄 + ': ' + ${teacher.age}"></span>
+                                                        <span class=" mb-2 d-xl-inline-block d-block ml-xl-4" th:text="职称 + ': ' + ${teacher.getTitle()}"></span>
+                                                        <span class=" mb-2 d-xl-inline-block d-block ml-xl-4" th:text="学院 + ': ' + ${teacher.college} "> </span>
+                                                    </p>
+                                                    <div class="mt-3">
+                                                        <span>所授课程 ：
+                                                            <span th:each="subject : ${subjectList}">
+                                                                <a href="#" class="badge badge-light mr-1" th:text="${subject.name}">C++</a>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <a href="/student/info" class="btn btn-secondary">点击修改信息</a>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
-                        <!-- recent orders  -->
-                        <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">考试信息表</h5>
-                                <div class="card-body p-0">
-                                    <div class="table-responsive">
-                                        <table class="table" >
-                                            <thead class="bg-light">
-                                            <tr class="border-0">
-                                                <th class="border-0">#</th>
-                                                <th class="border-0">考试编号</th>
-                                                <th class="border-0">考试名称</th>
-                                                <th class="border-0">考试科目</th>
-                                                <th class="border-0">考试时长</th>
-                                                <th class="border-0">考试时间</th>
-                                                <th class="border-0">考试状态</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="exam:${student.examList}">
-                                                <td>1</td>
-                                                <td th:text="${exam.number}"></td>
-                                                <td th:text="${exam.name}"></td>
-                                                <td th:text="${exam.course}"></td>
-                                                <td th:text="${exam.time} + 分钟"></td>
-                                                <td th:text="${#dates.format(exam.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                                <td th:switch="${exam.status}">
-                                                    <div th:case="1"><span class="badge-dot badge-brand mr-1"></span>未开始</div>
-                                                    <div th:case="2"><span class="badge-dot badge-dark mr-1"></span>已结束</div>
-                                                    <div th:case="3"><span class="badge-dot badge-success mr-1"></span>进行中</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="9"><a href="#" class="btn btn-outline-light float-right">查看详情</a></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                        <!-- ============================================================== -->
+                        <!-- basic table  -->
+                        <!-- ============================================================== -->
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <h5 class="card-header">最近的考试安排</h5>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered first">
+                                        <thead>
+                                        <tr>
+                                            <th class="border-0">#</th>
+                                            <th class="border-0">考试编号</th>
+                                            <th class="border-0">考试名称</th>
+                                            <th class="border-0">考试科目</th>
+                                            <th class="border-0">考试时长</th>
+                                            <th class="border-0">开始时间</th>
+                                            <th class="border-0">结束时间</th>
+                                            <th class="border-0">考试状态</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="exam:${examNotStart}">
+                                            <td>1</td>
+                                            <td th:text="${exam.number}"></td>
+                                            <td th:text="${exam.name}"></td>
+                                            <td th:text="${exam.course}"></td>
+                                            <td th:text="${exam.time} + 分钟"></td>
+                                            <td th:text="${#dates.format(exam.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                            <td th:text="${#dates.format(exam.endTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                            <td th:switch="${exam.status}">
+                                                <div th:case="1"><span class="badge-dot badge-brand mr-1"></span>未开始</div>
+                                                <div th:case="2"><span class="badge-dot badge-dark mr-1"></span>已结束</div>
+                                                <div th:case="3"><span class="badge-dot badge-success mr-1"></span>进行中</div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <span th:if="${examNotStart} == null">目前没有即将要进行的考试</span>
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+                    </div>
                         <!-- ============================================================== -->
-                        <!-- end recent orders  -->
+                        <!-- end basic table  -->
+                        <!-- ============================================================== -->
                     </div>
 
                 </div>
@@ -311,9 +326,9 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="text-md-right footer-links d-none d-sm-block">
-                            <a href="javascript: void(0);">About</a>
-                            <a href="javascript: void(0);">Support</a>
-                            <a href="javascript: void(0);">Contact Us</a>
+                            <a href="javascript: void(0);">关于</a>
+                            <a href="javascript: void(0);">支持</a>
+                            <a href="javascript: void(0);">联系我们</a>
                         </div>
                     </div>
                 </div>

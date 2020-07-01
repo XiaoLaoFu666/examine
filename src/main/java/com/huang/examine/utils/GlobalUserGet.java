@@ -30,6 +30,7 @@ public class GlobalUserGet {
         User user = accessInterceptor.getUser(request,response);
         return user;
     }
+
     private  User getUser(HttpServletRequest request, HttpServletResponse response) {
         String paramToken = request.getParameter(UserService.COOKI_NAME_TOKEN);
         String cookieToken = getCookieValue(request, UserService.COOKI_NAME_TOKEN);
@@ -51,5 +52,10 @@ public class GlobalUserGet {
             }
         }
         return null;
+    }
+
+    public User getTeacher(HttpServletRequest request, HttpServletResponse response) {
+        User user = accessInterceptor.getTeacherUser(request,response);
+        return user;
     }
 }

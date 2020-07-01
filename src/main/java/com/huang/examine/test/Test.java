@@ -2,7 +2,13 @@ package com.huang.examine.test;
 
 import com.huang.examine.entity.Student;
 import com.huang.examine.entity.User;
+import com.huang.examine.utils.DateUtils;
 import com.huang.examine.utils.MD5Util;
+import org.thymeleaf.expression.Dates;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author Mr.huang
@@ -27,4 +33,7 @@ public class Test {
 //        String calcPass = MD5Util.formPassToDBPass(password, salt);
 //        System.out.println(calcPass);
 //    }
+    public static void main(String[] args) {
+        DateUtils.LocalDateToDate("2020-01-03T18:00");
+    }
 }

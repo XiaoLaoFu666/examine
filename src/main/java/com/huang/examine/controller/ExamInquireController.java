@@ -49,7 +49,7 @@ public class ExamInquireController {
             ExamVo examVo = new ExamVo();
             examVo.setExam(exam);
             int score = examService.getScore(exam.getId(),student.getId());
-            int totalScore = pageService.findPageById(exam.getPageid()).getTotalScore();
+            int totalScore = pageService.findPageById(exam.getPageid()).getTotalscore();
             examVo.setScore(score);
             examVo.setTotalScore(totalScore);
             examVo.setStatus(examService.getExamStatus(student.getId(),exam.getId()));

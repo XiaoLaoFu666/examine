@@ -23,4 +23,9 @@ public class SpecialtyService implements SpecialtyDao {
     public Integer getIdBySpecialty(Specialty specialty) {
         return specialtyDao.getIdBySpecialty(specialty);
     }
+
+    @Override
+    public Specialty getSpecialtyById(Integer specialtyId) {
+        return specialtyDao.getSpecialtyById(specialtyId);
+    }
 }

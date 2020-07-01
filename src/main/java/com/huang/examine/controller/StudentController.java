@@ -2,6 +2,7 @@ package com.huang.examine.controller;
 
 import com.huang.examine.entity.Specialty;
 import com.huang.examine.entity.Student;
+import com.huang.examine.entity.User;
 import com.huang.examine.redis.RedisService;
 import com.huang.examine.redis.StudentKey;
 import com.huang.examine.result.CodeMsg;
@@ -53,29 +54,32 @@ public class StudentController {
 
 
     @RequestMapping("/index")
-    public String index(HttpServletRequest request, HttpServletResponse response, Model model){
-        Student student = (Student) globalUserGet.getCurrentUser(request,response);
-        model.addAttribute("student",student);
-        if(student == null){
+    public String index(HttpServletRequest request, HttpServletResponse response, Model model, User user){
+        if(user==null){
             return "login";
         }
+        Student student = (Student) user;
+        model.addAttribute("student",student);
         return "userIndex";
     }
     @RequestMapping("/info")
-    public String info(HttpServletRequest request,HttpServletResponse response,Model model){
-        Student student = (Student) globalUserGet.getCurrentUser(request,response);
-        model.addAttribute("student",student);
-        if(student == null){
+    public String info(HttpServletRequest request,HttpServletResponse response,Model model,User user){
+        if(user==null){
             return "login";
         }
+        Student student = (Student) user;
+        model.addAttribute("student",student);
         return "studentInfo";
     }
 
 
     @Transactional
     @RequestMapping("/changeInfo")
-    public String changeInfo(HttpServletRequest request,HttpServletResponse response,Model model) {
-        Student student = (Student) globalUserGet.getCurrentUser(request,response);
+    public String changeInfo(HttpServletRequest request,HttpServletResponse response,Model model,User user) {
+        if(user==null){
+            return "login";
+        }
+        Student student = (Student) user;
         student.setName(request.getParameter("name"));
         Specialty specialty = new Specialty();
         specialty.setCollege(request.getParameter("college"));
@@ -98,8 +102,11 @@ public class StudentController {
     @Transactional
     @RequestMapping("/changePass")
     @ResponseBody
-    public Result<String> changePass(HttpServletRequest request,HttpServletResponse response,Model model){
-        Student student = (Student) globalUserGet.getCurrentUser(request,response);
+    public Result<String> changePass(HttpServletRequest request,HttpServletResponse response,Model model,User user){
+        if(user==null){
+            return Result.error(CodeMsg.SESSION_ERROR);
+        }
+        Student student = (Student) user;
         String password = student.getPassword();
         String newPassword = request.getParameter("newPassword");
         String originalPassword = request.getParameter("originalPassword");
