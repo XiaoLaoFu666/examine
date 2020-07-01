@@ -55,6 +55,7 @@ public class MainController {
     @ResponseBody
     public Result<String> login(@Valid LoginVo loginVo,HttpServletResponse response){
         log.info(loginVo.toString());
+        System.out.println("hhhhhhhh ");
         return userService.login(response,loginVo);
     }
 

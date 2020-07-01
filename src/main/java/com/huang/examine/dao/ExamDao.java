@@ -30,7 +30,7 @@ public interface ExamDao {
     /**
      * 查询已完成的考试以及到期的考试
      * */
-    @Select("select distinct * from exam where id in (select exam from userexam where user = #{userId} and usertype = #{type}) and status = 2")
+    @Select("select distinct * from exam where id in (select exam from userexam where user = #{userId} and usertype = #{type})")
     public List<Exam> getExamOver(Integer userId,Integer type);
 
     @Insert("insert into pageques(id,pageId,questionId,type) values(#{id},#{pageId},#{questionId},#{type})")
